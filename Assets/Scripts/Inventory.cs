@@ -7,6 +7,7 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(string itemName)
     {
+        // Hint: Has the list been created? Read the stack trace from the top. / リストは作られている? スタックトレースを上から読む
         items.Add(itemName);
         Debug.Log("Bought " + itemName);
     }

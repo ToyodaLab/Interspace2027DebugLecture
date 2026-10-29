@@ -8,6 +8,7 @@ public class LightReactor : MonoBehaviour
     {
         lamp.enabled = !lamp.enabled;
         lamp.enabled = !lamp.enabled;
+        // Hint: Flip a switch twice, what happens? / スイッチを2回切り替えると?
         Debug.Log("Lamp is now " + lamp.enabled);
     }
 }
