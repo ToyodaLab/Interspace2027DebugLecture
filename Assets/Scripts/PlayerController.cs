@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Hint: Is this value really 5 in the Inspector? / Inspector の値は本当に 5?
+    // Hint: Is this value sensible? Check the Inspector too. / この値は適切? Inspector も確認
     public float speed = 5f;
     public float jumpForce = 5f;
     Rigidbody rb;
