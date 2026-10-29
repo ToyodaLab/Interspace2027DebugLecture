@@ -35,6 +35,14 @@ Controls: **Arrow keys** move · **Space** jump · **E** use the switch · **5**
 
 ### 8. Done when
 Play runs with a quiet Console, the player moves and jumps, the yellow cube spins, the lamp toggles with **E**, and the goal logs when you touch it.
+- The Console has no red errors and Play works.
+- The Console is quiet, with no flood of messages hiding real errors.
+- The blue player moves with the arrow keys at a sensible speed.
+- Space makes the player jump with no error.
+- The yellow cube spins.
+- Standing at the grey switch and pressing E toggles the lamp, once per press.
+- Touching the green cube prints “Goal reached by Player”.
+- Standing at the orange switch and pressing E prints Count: 10 down to 1, then Liftoff!
 
 ---
 
@@ -73,3 +81,11 @@ Unity が「コンパイルエラーがある」と表示し、**Safe Mode** を
 
 ### 8. 完了の条件
 Console が静かな状態で Play でき、プレイヤーが移動・ジャンプし、黄色いキューブが回り、**E** でランプが切り替わり、ゴールに触れるとログが出れば完了です。
+- Console に赤いエラーがなく、Play できる
+- Console が静か（大量のログで他が見えない状態ではない）
+- 青いプレイヤーが矢印キーでほどよい速さで動く
+- Space でジャンプし、エラーが出ない
+- 黄色いキューブが回る
+- 灰色のスイッチの近くで E を押すと、押すたびに 1 回ランプが切り替わる
+- 緑のキューブに触れると “Goal reached by Player” と表示される
+- オレンジのスイッチの近くで E を押すと Count: 10 から 1 まで表示され、最後に Liftoff! と出る
