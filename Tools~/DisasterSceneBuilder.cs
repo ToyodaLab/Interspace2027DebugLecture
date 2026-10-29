@@ -169,13 +169,6 @@ public static class DisasterSceneBuilder
         Set(ew, "enemy", enemy);
         Label(watcher, 1f);
 
-        // Shop
-        var shop = Empty("Shop", new Vector3(4, 0.5f, 9));
-        var inv = shop.AddComponent<Inventory>();
-        var sh = shop.AddComponent<Shop>();
-        Set(sh, "inventory", inv);
-        Label(shop, 1f);
-
         // Box (no Rigidbody)
         var box = Prim(PrimitiveType.Cube, "Box", new Vector3(6, 0.5f, -5), new Vector3(1.5f, 1, 1.5f), brown);
         box.AddComponent<BoxPusher>();
@@ -192,7 +185,6 @@ public static class DisasterSceneBuilder
         Object.DestroyImmediate(coinTemp);
         var coinInst = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
         coinInst.transform.position = new Vector3(8, 0.6f, -9);
-        Set(coinInst.GetComponent<CoinPickup>(), "value", 10);
         LabelAt("Coin", coinInst.transform.position + Vector3.up * 1.3f);
 
         var spawner = Empty("CoinSpawner", new Vector3(8, 0.5f, 9));
@@ -212,11 +204,6 @@ public static class DisasterSceneBuilder
         var goal = Prim(PrimitiveType.Cube, "Goal", new Vector3(12, 0.5f, -7), new Vector3(2, 1, 2), green);
         goal.AddComponent<Goal>();
         Label(goal, 1.4f);
-        var goal2d = Prim(PrimitiveType.Cube, "Goal2D", new Vector3(12, 0.5f, -3), new Vector3(2, 1, 2), green);
-        Object.DestroyImmediate(goal2d.GetComponent<BoxCollider>());
-        goal2d.AddComponent<BoxCollider2D>().isTrigger = true;
-        goal2d.AddComponent<Goal>();
-        Label(goal2d, 1.4f);
 
         // Switch and lamp
         var sw = Prim(PrimitiveType.Cube, "Switch", new Vector3(-8, 0.5f, 2), Vector3.one, grey);
@@ -235,28 +222,14 @@ public static class DisasterSceneBuilder
         Set(lr, "lamp", light);
         Label(lampGo, 1.5f);
 
-        // Looker and target
-        var looker = Prim(PrimitiveType.Capsule, "Looker", new Vector3(-12, 1, -13), Vector3.one, grey);
-        looker.AddComponent<Looker>();
-        Label(looker, 2.2f);
-        var target = Prim(PrimitiveType.Cube, "Target", new Vector3(-12, 0.5f, -5), Vector3.one, red);
-        Label(target, 1.2f);
-
         BuildCanvas();
-
-        // Script Execution Order
-        foreach (var ms in MonoImporter.GetAllRuntimeMonoScripts())
-            if (ms != null && ms.GetClass() == typeof(LivesDisplay))
-                MonoImporter.SetExecutionOrder(ms, -100);
 
         EditorSceneManager.SaveScene(scene, ScenePath);
         EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
-        Debug.Log("Disaster scene built. Coin instance overrides: "
-                  + PrefabUtility.GetObjectOverrides(coinInst).Count
-                  + ", modifications: " + PrefabUtility.GetPropertyModifications(coinInst).Length);
+        Debug.Log("Disaster scene built.");
     }
 
     static void BuildCanvas()
@@ -274,10 +247,6 @@ public static class DisasterSceneBuilder
         var scoreUi = scoreText.gameObject.AddComponent<ScoreUI>();
         Set(scoreUi, "label", scoreText);
 
-        var livesText = UiText(canvasGo.transform, "LivesText", "Lives: 3", 44,
-            new Vector2(0, 1), new Vector2(0, 1), new Vector2(30, -90), new Vector2(600, 60), Color.white);
-        livesText.gameObject.AddComponent<LivesDisplay>();
-
         // Panel background on the right 35% of the screen (the camera draws in the left 65%)
         var bg = new GameObject("InstructionBackground", typeof(RectTransform), typeof(Image));
         bg.transform.SetParent(canvasGo.transform, false);
@@ -292,7 +261,6 @@ public static class DisasterSceneBuilder
             "Arrow keys: move / 矢印キー: 移動\n" +
             "Space: jump / スペース: ジャンプ\n" +
             "E: use switch / E: スイッチを使う\n" +
-            "1: buy item / 1: アイテムを買う\n" +
             "2: spawn coin / 2: コインを出す\n" +
             "3: check enemy / 3: 敵を確認\n" +
             "4: total scores / 4: スコア合計\n" +
