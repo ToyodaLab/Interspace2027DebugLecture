@@ -6,12 +6,12 @@ public class Countdown : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            int count = 10;
-            // Hint: Does anything change inside the loop? Save first! / ループ内で何か変わる? 先に保存!
-            while (count > 0)
+            // Hint: Does the loop run at all? Check its condition. / ループは実行されている? 条件を確認
+            for (int i = 10; i > 10; i--)
             {
-                Debug.Log("Count: " + count);
+                Debug.Log("Count: " + i);
             }
+            Debug.Log("Liftoff!");
         }
     }
 }
